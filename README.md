@@ -850,6 +850,20 @@ export default new Vuex.Store({
 ...
 ```
 
+# Deploy VueJS application to Kubernetes
+
+* Create a build from your VueJS project
+
+```
+# npm run build
+```
+
+This will create a minified version of you website that is ready to be deployed in the /dist folder of your project.
+
+* Prepare Nginx
+
+
+
 
 
 	

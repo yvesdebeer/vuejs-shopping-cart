@@ -1,12 +1,21 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <NavHeader />
     <router-view/>
   </div>
 </template>
+	
+<script>
+import NavHeader from "@/NavHeader.vue"
+export default {
+  components: {
+    NavHeader
+  },
+  mounted(){
+    this.$store.dispatch("getProducts");
+  }
+}
+</script>
 
 <style>
 #app {

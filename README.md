@@ -577,7 +577,7 @@ export default {
 
 Now you should have a working application. Verify the shopping cart works correctly by adding some items and check the contents of you shopping cart.
 
-####15. Add User Authentication functionality
+### 15. Add User Authentication functionality
 
 For user authentication we will make use of the IBM "App ID" service and integrate it into our application.
 
@@ -728,10 +728,10 @@ Start the application and check if you get the login screen from IBM App ID when
 You will probably get an error "Invalid redirect_uri".
 To solve this, follow the instructions from the error page and add http://localhost:3000/* as a web redirect URL.
 
-As a final step we need ti create the "REDIRECT_URL_WEB_APP"-url in our application.
+As a final step we need to create the "REDIRECT_URL_WEB_APP"-url in our application.
 This url e.g. "http://localhost:8080/loginwithtoken" will be called by our NodeJS application and will process the userid and tokens to store them into our Vuex store so we can keep track of the logged user.
 
-**Create a new file Login.vue in the src directory**
+**Create a new file Login.vue in the src directory of your VueJS application**
 
 The contents of Login.vue should look as follows:
 
@@ -821,7 +821,7 @@ export default router
 
 **This concludes the installation instructions to develop a Store application and run it locally.**
 
-Optionally, if you want to persist the Vuex-store perform the following steps:
+Optionally, if you want to persist the Vuex-store, perform the following steps:
 (this prevents for example that an end-user loses his cart contents when logging in)
 
 1. install the npm module
@@ -937,7 +937,7 @@ This will start the container. The -d argument tells docker to run in the backgr
 # docker stop shopping-cart
 ```
 
-##Deploy to OpenShift
+## Deploy to OpenShift
 
 In order to avoid having to run the "npm run build" locally we can also use a Dockerfile as a two-step process.
 
@@ -979,13 +979,13 @@ Once the Deployment has completed, you can verify the application is working cor
 
 - Goto the "Build Config" and select your specific Build Config
 - Click the Github "Copy URL with Secret"
-- Goto to your Github project and select "Settings" -> Webhooks
+- Goto to your Github project on "github.com" and select "Settings" -> Webhooks
 	- Add a new webhook and paste the URL copied in previous step in "Payload URL"
 	- Select "application/json" as Content Type
 	- Click "Add webhook"
 - The result of this configuration will trigger a new build run on Openshift as soon as new code gets committed into the repository.
 
-##Add variables to create a more dynamic application environment
+## Add variables to create a more dynamic application environment
 
 - Add a ".env" file into the root of your project
 
@@ -1098,7 +1098,7 @@ export default {
 
 - Now you can also set the URL variables as part of the Build Config in OpenShift:
 
-	- Goto "Build Configs" and select yours
+	- Goto "Build Configs" and select your build config
 	- Click on the tab "Environment"
 	- Set the 2 variables : "VUE_APP_AUTH_URL" and "VUE_APP_PRODUCTS_URL" to values that reflect your environment.
 	- Run a new build

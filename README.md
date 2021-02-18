@@ -102,9 +102,11 @@ export default {
 Now you can verify that the products are correctly loaded using the 'VUE' Chrome-Extension (look at the Vuex state variables).
 Also check the console log.
 			
-## 4. Add Bootstrap to your project: within your public/index.html
+## 4. Add Bootstrap to your project
 
 <https://getbootstrap.com/docs/5.0/getting-started/introduction/>
+
+Within your public/index.html:
 	
 Add CSS link into \<head> :
 
@@ -119,7 +121,9 @@ Add Bootstrap bundle script:
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 ```
 	
-###5. 	Modify the src/views/Home.vue view
+## 5. Modify the src/views/Home.vue view
+
+
 ```
 <template>
     <h1>{{products}}</h1>
@@ -144,7 +148,7 @@ export default {
 		
 Now you should see a JSON dump of the products on the home page.
 
-###6. Let's format the JSON output into shoppingcards
+## 6. Format the JSON output into shoppingcards
 
 Replace the template from Home.vue with:
 
@@ -165,7 +169,7 @@ Replace the template from Home.vue with:
 You should see some error statements about the 'Item' component.
 We will solve this in the following sections.
 
-###7. Create a new file: 'Item.vue' in the src directory and import it in 'Home.vue'
+## 7. Create a new file: 'Item.vue' in the src directory and import it in 'Home.vue'
 
 Add import statement: ***import Item from "@/Item.vue"***
 
@@ -196,7 +200,7 @@ export default {
 </script>
 ```
 
-###8. Add a Product card to Item.vue
+## 8. Add a Product card to Item.vue
 
 More info on using Cards with Bootstrap: <https://getbootstrap.com/docs/5.0/components/card/>
 
@@ -214,7 +218,7 @@ More info on using Cards with Bootstrap: <https://getbootstrap.com/docs/5.0/comp
 </template>
 ```	
 	
-###9. Also add the script-tag to Item.vue
+## 9. Also add the script-tag to Item.vue
 ```
 <script>
 export default {
@@ -226,7 +230,7 @@ export default {
 		
 You can now start correcting the card information with the item fields: e.g. Card title can be replaced with {{item.title}}
 
-###10. The final result should look like the following (including some styling and a filter for the product description):
+## 10. The final result should look like the following (including some styling and a filter for the product description):
 
 ```
 <template>
@@ -305,7 +309,7 @@ export default {
 </style>
 ```	
 			
-###11. Add a Navigation Header bar to the Store
+## 11. Add a Navigation Header bar to the Store
 
 * Create a NavHeader.vue file in the src directory
 
@@ -342,7 +346,7 @@ export default {
 </script>
 ```
 		
-###12. Add a shopping cart
+## 12. Add a shopping cart
 
 Create a ShoppingCart.vue in the src directory
 
@@ -435,7 +439,7 @@ Add the following tag to public/index.html to get the special icons such as a sh
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 ```
 
-###13. Replace store/index.js with following code:
+## 13. Replace store/index.js with following code:
 
 The Vuex store will now also allow to :
 
@@ -511,7 +515,7 @@ export default new Vuex.Store({
 })
 ```
 
-###14. Update NavHeader.vue - replace existing code with:
+## 14. Update NavHeader.vue - replace existing code with:
 
 ```
 <template>

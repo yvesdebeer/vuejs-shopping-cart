@@ -850,7 +850,9 @@ export default new Vuex.Store({
 ...
 ```
 
-# Deploy VueJS application to Kubernetes
+# Deploy a VueJS application to RedHat OpenShift
+
+In this section we will describe how to take production-ready VueJS-code (Html & Javascript), push it into a Nginx docker container and deploy it on OpenShift.
 
 * Create a build from your VueJS project
 
@@ -859,8 +861,240 @@ export default new Vuex.Store({
 ```
 
 This will create a minified version of you website that is ready to be deployed in the /dist folder of your project.
+All you need to do now is to serve these static resources in a web server like e.g. Nginx (additional info can be found here: https://www.openshift.com/blog/deploy-vuejs-applications-on-openshift)
 
 * Prepare Nginx
+
+Create a nginx.conf file into the main project directory:
+
+```
+# nginx.conf
+worker_processes auto;
+
+pid /tmp/nginx.pid;
+
+events {
+ worker_connections 1024;
+}
+
+http {
+ include /etc/nginx/mime.types;
+  client_body_temp_path /tmp/client_temp;
+ proxy_temp_path       /tmp/proxy_temp_path;
+ fastcgi_temp_path     /tmp/fastcgi_temp;
+ uwsgi_temp_path       /tmp/uwsgi_temp;
+ scgi_temp_path        /tmp/scgi_temp;
+
+ server {
+   listen 8080;
+   server_name _;
+
+   index index.html;
+   error_log  /tmp/error.log;
+   access_log /tmp/access.log;
+
+   location / {
+     root /code;
+     try_files $uri /index.html;
+   }
+ }
+}
+```
+
+* Create a Dockerfile
+
+```
+FROM nginx:1.17
+COPY ./nginx.conf /etc/nginx/nginx.conf
+WORKDIR /code
+COPY ./dist .
+EXPOSE 8080:8080
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+* A this stage you can already build and run the container locally
+
+```
+# docker build -t shopping:1.0 .
+# docker run -d --rm --name shopping-cart -p 3000:8080 shopping:1.0
+```
+
+This will start the container. The -d argument tells docker to run in the background. The --rm is used so that the container image is destroyed once you run ‘docker stop’. The --name is a label for your container. The -p maps port 3000 on your local machine to port 8080 in our container. This is the port on which nginx is running according to our config file. Finally, shopping-cart is the name you gave to the container you built.
+
+
+
+```
+# docker stop shopping-cart
+```
+
+##Deploy to OpenShift
+
+In order to avoid having to run the "npm run build" locally we can also use a Dockerfile as a two-step process.
+
+```
+# build stage
+FROM node:lts-alpine as build-stage
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# production stage
+FROM nginx:1.17
+COPY ./nginx.conf /etc/nginx/nginx.conf
+WORKDIR /code
+COPY --from=build-stage /app/dist .
+EXPOSE 8080:8080
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+This will first build a NodeJS container which will be used to create our production-ready code into a folder /dist.
+The second part of the Dockerfile will take the /dist folder from the first step and add it to a new Nginx container.
+
+For this you will need to check-in your project into a new github repository.
+Once your project is in sync with the gitub repository, open up the Openshift Web-console: Goto the Developer perspective and click "Add" from the menu on the left.
+
+- Select Add from Dockerfile
+- Fill in the "Git Repo URL" which points to your project on github
+- Click "Show Advanced Git Options" and specify the "Git Reference" to point to your branch. This is only needed if your branch is different then "master" !
+- Change the Application and Name accordingly or accept the defaults
+- Finally Click "Create"
+
+This should result in a full deployment of the application.
+the "Build Config" will create a "Build" to construct the final image.
+Once the Deployment has completed, you can verify the application is working correctly by clicking on the generated route URL.
+
+**Adding a Github Webhook to automatically update the Openshift deployment as soon as new code is pushed into the repository:**
+
+- Goto the "Build Config" and select your specific Build Config
+- Click the Github "Copy URL with Secret"
+- Goto to your Github project and select "Settings" -> Webhooks
+	- Add a new webhook and paste the URL copied in previous step in "Payload URL"
+	- Select "application/json" as Content Type
+	- Click "Add webhook"
+- The result of this configuration will trigger a new build run on Openshift as soon as new code gets committed into the repository.
+
+##Add variables to create a more dynamic application environment
+
+- Add a ".env" file into the root of your project
+
+```
+VUE_APP_AUTH_URL="http://localhost:3000/login"
+VUE_APP_PRODUCTS_URL="http://localhost:8080/products"
+```
+
+- Update src/store/index.js
+
+```
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+var url;
+const headers = { Accept: "application/json" };
+
+export default new Vuex.Store({
+  state: {
+    products: [],
+    inCart: [],
+    user: {
+      isAuthenticated: false,
+      name: "",
+      email: "",
+      idToken: ""
+    },
+    endpoints: {
+      login: "http://localhost:3000/login",
+      products: "http://localhost:8080/products"
+    },
+   },
+   getters: {
+    products: state => state.products,
+    inCart: state => state.inCart,
+   },
+   mutations: { //synchronous
+     setProducts(state, payload) {
+       state.products = payload;
+     },
+     addToCart(state, payload) { 
+      console.log(payload);
+      state.inCart.push(payload);
+     },
+     removeFromCart(state, item) { 
+       state.inCart.splice(item, 1); 
+     },
+     logout(state) {
+      state.user.isAuthenticated = false;
+      state.user.name = "";
+      state.user.email ="";
+      state.user.idToken ="";
+     },
+     login(state, payload) {
+      state.user.isAuthenticated = true;
+      state.user.name = payload.name;
+      state.user.email =payload.email;
+      state.user.idToken =payload.idToken;
+     },
+     setUrls(state) {
+       state.endpoints.login = process.env.VUE_APP_AUTH_URL;
+       state.endpoints.products = process.env.VUE_APP_PRODUCTS_URL;
+       url = state.endpoints.products;
+       console.log(process.env);
+     }
+   },
+   actions: { //asynchronous
+     async getProducts(state) {
+       const products = await fetch(url, { headers });
+       const prods = await products.json();
+       state.commit("setProducts", prods);
+       console.log(prods);
+     }
+   },
+  modules: {
+  }
+})
+```
+
+This will set the URL's into the store state variables, taken from the .env file
+
+- Modify App.vue to set the URL's at load time:
+
+```
+<template>
+  <div id="app">
+    <NavHeader />
+    <router-view/>
+  </div>
+</template>
+	
+<script>
+import NavHeader from "@/NavHeader.vue"
+export default {
+  components: {
+    NavHeader
+  },
+  mounted(){
+    this.$store.commit("setUrls");
+    this.$store.dispatch("getProducts");
+  }
+}
+</script>
+
+...
+
+```
+
+- Now you can also set the URL variables as part of the Build Config in OpenShift:
+
+	- Goto "Build Configs" and select yours
+	- Click on the tab "Environment"
+	- Set the 2 variables : "VUE_APP_AUTH_URL" and "VUE_APP_PRODUCTS_URL" to values that reflect your environment.
+	- Run a new build
+	- Once the Build is completed, check the Web application and inspect the console within the browser and watch the updated environment variables as part of the console logging.
+	
+ 
 
 
 

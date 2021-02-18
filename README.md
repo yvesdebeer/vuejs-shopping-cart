@@ -1,21 +1,27 @@
 ## Create a Vue.js shopping cart
 
-<https://travishorn.com/vue-online-store-with-shopping-cart-c072433f8d9e>
+This guide contains instructions to create an online store application, including shopping cart and client authentication. At the end you will also find the instructions to deploy the application on Red Hat Openshift.
 
-<https://vuejs.org>
+If you are new to VueJS, here are some links to get started :
 
-Learn Vuex in 15 minutes: <https://www.youtube.com/watch?v=oxUyIzDbZts&t=240s>
+* <https://travishorn.com/vue-online-store-with-shopping-cart-c072433f8d9e>
+* <https://vuejs.org>
+* Learn Vuex in 15 minutes: <https://www.youtube.com/watch?v=oxUyIzDbZts&t=240s>
 
-###1. Create a new Vue.js application
+## 1. Create a new Vue.js application
+
 ```
-	# vue create shopping-cart
-	-> manually select features
-	-> select Vuex and Router
-	(use default settings for all next interactive questions)
-	# cd shopping-cart
-	# npm run serve
+# npm install -g @vue/cli
+	
+# vue create shopping-cart
+-> manually select features
+-> select Vuex and Router
+(use default settings for all next interactive questions)
+# cd shopping-cart
+# npm run serve
 ```	
-###2. 	Load products into store array (src/store/index.js)
+
+## 2. 	Load products into store array (src/store/index.js)
 
 Define products array in state, add async action to fetch products and add mutations to store products array (assuming a product web-service running locally)
 
@@ -79,7 +85,7 @@ actions: { //asynchronous
 },
 ```
 			  
-###3. Add code to App.vue to get the products at load time
+## 3. Add code to App.vue to get the products at load time
 
 Dispatch action to store:
 
@@ -96,7 +102,7 @@ export default {
 Now you can verify that the products are correctly loaded using the 'VUE' Chrome-Extension (look at the Vuex state variables).
 Also check the console log.
 			
-###4. Add Bootstrap to your project: within your public/index.html
+## 4. Add Bootstrap to your project: within your public/index.html
 
 <https://getbootstrap.com/docs/5.0/getting-started/introduction/>
 	

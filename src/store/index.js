@@ -4,8 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 var url;
-const headers = { "Accept": "application/json",
-                  "Access-Control-Allow-Origin": "*"};
+const headers = { Accept: 'application/json' };
 
 export default new Vuex.Store({
   state: {
@@ -58,7 +57,7 @@ export default new Vuex.Store({
    },
    actions: { //asynchronous
      async getProducts(state) {
-       const products = await fetch(url, { headers });
+       const products = await fetch(url, { mode: 'cors', headers });
        const prods = await products.json();
        state.commit("setProducts", prods);
        console.log(prods);

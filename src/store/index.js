@@ -57,7 +57,7 @@ export default new Vuex.Store({
    },
    actions: { //asynchronous
      async getProducts(state) {
-       const products = await fetch(url, { mode: 'no-cors', headers });
+       const products = await fetch(url, { headers });
        const prods = await products.json();
        state.commit("setProducts", prods);
        console.log(prods);

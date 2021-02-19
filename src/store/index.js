@@ -4,7 +4,8 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 var url;
-const headers = { Accept: "application/json" };
+const headers = { Accept: "application/json",
+                  'Access-Control-Allow-Origin': "*"};
 
 export default new Vuex.Store({
   state: {

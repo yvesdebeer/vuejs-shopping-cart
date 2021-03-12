@@ -455,7 +455,7 @@ export default {
 </script>
 ```
 
-Add the following tag to public/index.html to get the special icons such as a shopping cart:
+Add the following CSS into `<head>` of public/index.html to get the special icons such as a shopping cart:
 
 ```
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

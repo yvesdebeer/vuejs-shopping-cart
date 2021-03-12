@@ -115,7 +115,8 @@ export default {
 			
 Now you can verify that the products are correctly loaded using the 'VUE' Chrome-Extension (look at the Vuex state variables).
 Also check the console log for possible errors.
-One error you might get is a CORS blocked error because of a Cross-Domain request to you product service. In order to solve this you can install the Chrome CORS-Policy extension and activate it.
+One error you might get is a CORS blocked error because of a Cross-Domain request to your product service. In order to solve this you can install the Cors Chrome extension <https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf> and activate it.
+This 
 			
 ## 4. Add Bootstrap to your project
 
@@ -187,6 +188,8 @@ You should see some error statements about the 'Item' component.
 We will solve this in the following sections.
 
 ## 7. Create a new empty file: 'Item.vue' in the src directory and modify 'Home.vue' to import it
+
+In this step we will import the 'Item.vue' into 'Home.vue' and define it as a component for further use.
 
 Add import statement: ***import Item from "@/Item.vue"***
 

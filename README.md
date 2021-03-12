@@ -116,7 +116,7 @@ export default {
 Now you can verify that the products are correctly loaded using the 'VUE' Chrome-Extension (look at the Vuex state variables).
 Also check the console log for possible errors.
 One error you might get is a CORS blocked error because of a Cross-Domain request to your product service. In order to solve this you can install the Cors Chrome extension <https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf> and activate it.
-This 
+This works great in a development environment. Once we deploy to production, all components will be hosted on the same domain so that will not cause any problems.
 			
 ## 4. Add Bootstrap to your project
 
@@ -477,7 +477,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const url = "http://localhost:8080/products";
+const url = "http://localhost:8000/products";
 const headers = { Accept: "application/json" };
 
 export default new Vuex.Store({

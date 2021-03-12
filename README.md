@@ -7,8 +7,15 @@ If you are new to VueJS, here are some links to get started :
 * <https://travishorn.com/vue-online-store-with-shopping-cart-c072433f8d9e>
 * <https://vuejs.org>
 * Learn Vuex in 15 minutes: <https://www.youtube.com/watch?v=oxUyIzDbZts&t=240s>
+* https://vuex.vuejs.org/#what-is-a-state-management-pattern
 
 ## 1. Create a new Vue.js application
+
+**Prerequisites**:
+
+Install Node.js on your local machine (Mac, Windows, Linux) if not already present.
+
+You need Node.js, since the libraries required for Vue are downloaded using node package manager (npm). Refer to <https://nodejs.org/en/> to install Node.js.
 
 ```
 # npm install -g @vue/cli
@@ -25,7 +32,9 @@ If you are new to VueJS, here are some links to get started :
 
 Define products array in state, add async action to fetch products and add mutations to store products array (assuming a product web-service running locally)
 
-If you don't have a web-service yet, you can use e.g. "Mockoon" to quicky run a mockup service using a JSON data response with 3 products :
+If you don't have a web-service yet, you can use e.g. "Mockoon" to quicky run a mockup service using a JSON data response with 3 products : expose the service on port 8000.
+
+Check that your product service is working: http://localhost:8000/products !
 
 ```
 [
@@ -61,7 +70,7 @@ If you don't have a web-service yet, you can use e.g. "Mockoon" to quicky run a 
 ...
 Vue.use(Vuex)
 
-const url = "http://localhost:8080/products";
+const url = "http://localhost:8000/products";
 const headers = { Accept: "application/json" };
 ```
 ...
@@ -114,7 +123,7 @@ Add CSS link into \<head> :
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 ```	
 
-Add Bootstrap bundle script:
+Add Bootstrap bundle scripts into \<body> :
 
 ```
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -597,7 +606,7 @@ NodeJS uses 'openid-client'-package for oauth communication.
 The Vue.js application invokes a ‘login’ endpoint of this service. The authentication service triggers the OAuth dance and returns the tokens to the web application.
 After successful logins the Vue.js web application retrieves the access token and stores it together with the user name and email address in the Vuex store.
 
-**Create a new node.js application**
+**Create a new node.js application in a directory outside your shopping cart application**
 
 Add a package.json file:
 
@@ -777,7 +786,7 @@ Finally it will force a reload of the root home page.
 
 **Add a route to /loginwithtoken on our application**
 
-Edit src/route/index.js:
+Edit src/router/index.js:
 
 - import the Login.vue file
 
@@ -911,7 +920,7 @@ http {
 }
 ```
 
-* Create a Dockerfile
+* Create a "Dockerfile" in the main project directory:
 
 ```
 FROM nginx:1.17

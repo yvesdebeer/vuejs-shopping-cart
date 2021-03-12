@@ -117,6 +117,8 @@ Now you can verify that the products are correctly loaded using the 'VUE' Chrome
 Also check the console log for possible errors.
 One error you might get is a CORS blocked error because of a Cross-Domain request to your product service. In order to solve this you can install the Cors Chrome extension <https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf> and activate it.
 This works great in a development environment. Once we deploy to production, all components will be hosted on the same domain so that will not cause any problems.
+Alternatively you can also adapt your Mockoon service to return CORS headers upon request.
+To make this happen, goto the Mockoon 'Environment Settings' and enable CORS as well as 'Add CORS headers' to environment headers below'.
 			
 ## 4. Add Bootstrap to your project
 
@@ -595,7 +597,7 @@ export default {
 </script>
 ```
 
-Now you should have a working application. Verify the shopping cart works correctly by adding some items and check the contents of you shopping cart.
+Now you should have a working application. Verify the shopping cart works correctly by adding some items and check the contents of your shopping cart.
 
 ### 15. Add User Authentication functionality
 

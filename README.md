@@ -109,7 +109,8 @@ export default {
 ```
 			
 Now you can verify that the products are correctly loaded using the 'VUE' Chrome-Extension (look at the Vuex state variables).
-Also check the console log.
+Also check the console log for possible errors.
+One error you might get is a CORS blocked error because of a Cross-Domain request to you product service. In order to solve this you can install the Chrome CORS-Policy extension and activate it.
 			
 ## 4. Add Bootstrap to your project
 

@@ -66,6 +66,8 @@ Check that your product service is working: http://localhost:8000/products !
 ```
 **Edit src/store/index.js**
 
+Add 2 constants:
+
 ```
 ...
 Vue.use(Vuex)
@@ -74,6 +76,8 @@ const url = "http://localhost:8000/products";
 const headers = { Accept: "application/json" };
 ```
 ...
+
+Replace the state, mutations and actions with the code below:
 
 ```
 state: {
@@ -96,7 +100,8 @@ actions: { //asynchronous
 			  
 ## 3. Add code to App.vue to get the products at load time
 
-Dispatch action to store:
+Dispatch action to store to load the products - place the following code between `</template>` and `<style>`
+
 
 ```
 <script>
@@ -131,7 +136,9 @@ Add Bootstrap bundle scripts into \<body> :
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 ```
 	
-## 5. Modify the src/views/Home.vue view
+## 5. Modify the src/views/Home.vue
+
+Replace the existing code with the following:
 
 
 ```
@@ -179,7 +186,7 @@ Replace the template from Home.vue with:
 You should see some error statements about the 'Item' component.
 We will solve this in the following sections.
 
-## 7. Create a new file: 'Item.vue' in the src directory and import it in 'Home.vue'
+## 7. Create a new empty file: 'Item.vue' in the src directory and modify 'Home.vue' to import it
 
 Add import statement: ***import Item from "@/Item.vue"***
 
@@ -190,7 +197,7 @@ components: {
   Item
 }
 ```
-The result should look like this:
+The `<script>` in 'Home.vue' should now look like this:
 
 ```
 <script>
@@ -238,7 +245,7 @@ export default {
 </script>
 ```	
 		
-You can now start correcting the card information with the item fields: e.g. Card title can be replaced with {{item.title}}
+You can now start correcting the card information with the item fields: e.g. Card title can be replaced with {{item.title}}... or copy the final result from the next step.
 
 ## 10. The final result should look like the following (including some styling and a filter for the product description):
 

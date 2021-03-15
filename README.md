@@ -738,7 +738,7 @@ REDIRECT_URL_CALLBACK=http://localhost:3000/callback
 REDIRECT_URL_WEB_APP=http://localhost:8080/loginwithtoken
 ```
 
-Update the values with your own IBM App ID values accordingly.
+Update each value with your own IBM App ID values accordingly.
 Also verify the "REDIRECT_URL_WEB_APP"-url points to your application.
 
 Start the application and check if you get the login screen from IBM App ID when clicking the Login-button on the navigation bar.

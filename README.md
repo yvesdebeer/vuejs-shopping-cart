@@ -43,7 +43,7 @@ Check that your product service is working: http://localhost:8000/products !
     "id": 1,
     "price": 2399,
     "quantity": 10,
-    "thumbnail_url": "https://www.dropbox.com/s/swg9bdr0ejcbtrl/img9.jpg?raw=1",
+    "thumbnail_url": "https://macbookpics.s3.eu-de.cloud-object-storage.appdomain.cloud/img1.jpeg",
     "title": "macbook Retina 13.3' ME662 (2013)"
   },
   {
@@ -51,7 +51,7 @@ Check that your product service is working: http://localhost:8000/products !
     "id": 2,
     "price": 1199,
     "quantity": 15,
-    "thumbnail_url": "https://www.dropbox.com/s/6tqcep7rk29l59e/img2.jpeg?raw=1",
+    "thumbnail_url": "https://macbookpics.s3.eu-de.cloud-object-storage.appdomain.cloud/img2.jpeg",
     "title": "Macbook Pro 13.3' Retina MF841LL/A"
   },
   {
@@ -59,7 +59,7 @@ Check that your product service is working: http://localhost:8000/products !
     "id": 3,
     "price": 1800,
     "quantity": 1,
-    "thumbnail_url": "https://www.dropbox.com/s/78fot6w894stu3n/img3.jpg?raw=1",
+    "thumbnail_url": "https://macbookpics.s3.eu-de.cloud-object-storage.appdomain.cloud/img3.jpeg",
     "title": "Macbook Pro 15.4' Retina MC975LL/A Model 2012"
   }
 ]
@@ -985,6 +985,8 @@ This will first build a NodeJS container which will be used to create our produc
 The second part of the Dockerfile will take the /dist folder from the first step and add it to a new Nginx container.
 
 For this you will need to check-in your project into a new github repository.
+Make sure you put the Dockerfile into the root of your project directory !
+
 Once your project is in sync with the gitub repository, open up the Openshift Web-console: Goto the Developer perspective and click "Add" from the menu on the left.
 
 - Select Add from Dockerfile
@@ -1117,6 +1119,7 @@ export default {
 ...
 
 ```
+At this point you should be able to access your application using the generated application URL but you will not see any products ! Any idea why these are not shown ? Check the console log using the 'inspect' function within your chrome browser.
 
 - Now you can also set the URL variables as part of the Build Config in OpenShift:
 
@@ -1125,6 +1128,7 @@ export default {
 	- Set the 2 variables : "VUE_APP_AUTH_URL" and "VUE_APP_PRODUCTS_URL" to values that reflect your environment.
 	- Run a new build
 	- Once the Build is completed, check the Web application and inspect the console within the browser and watch the updated environment variables as part of the console logging.
+
 	
  
 

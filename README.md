@@ -754,7 +754,7 @@ Start the application and check if you get the login screen from IBM App ID when
 ```
 
 You will probably get an error "Invalid redirect_uri".
-To solve this, goto to your AppID service instance -> Manage Authentication -> Authentication Settings and add http://localhost:3000/* as a web redirect URL.
+To solve this, goto to your AppID service instance -> Manage Authentication -> Authentication Settings and add <http://localhost:3000/*> as a web redirect URL.
 
 As a final step we need to create the "REDIRECT_URL_WEB_APP"-url in our application.
 This url e.g. "http://localhost:8080/loginwithtoken" will be called by our NodeJS application and will process the userid and tokens to store them into our Vuex store so we can keep track of the logged user.

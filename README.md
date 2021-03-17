@@ -636,8 +636,8 @@ Add a package.json file:
   "author": "",
   "license": "ISC"
 }
-# npm i express express-session dotenv --save
-# npm i openid-client@2.4.5 --save
+# npm i express express-session dotenv
+# npm i openid-client@2.4.5
 
 ```
 Create server.js

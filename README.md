@@ -37,7 +37,7 @@ If you don't have a web-service yet, you can use e.g. "Mockoon" to quicky run a 
 Check that your product service is working: http://localhost:8000/products !
 
 ```
-[
+[[
   {
     "description": "3.0GHz Dual-core Haswell Intel Core i5 Turbo Boost up to 3.2 GHz, 3MB L3 cache 8GB (two 4GB SO-DIMMs) of 1600MHz DDR3 SDRAM",
     "id": 1,
@@ -62,7 +62,7 @@ Check that your product service is working: http://localhost:8000/products !
     "thumbnail_url": "https://macbookpics.s3.eu-de.cloud-object-storage.appdomain.cloud/img3.jpeg",
     "title": "Macbook Pro 15.4' Retina MC975LL/A Model 2012"
   }
-]
+]](https://cloud.ibm.com/authorize/ucllprojectweek)
 ```
 **Edit src/store/index.js**
 
@@ -607,7 +607,7 @@ First create a new "App ID" service instance in IBM Cloud - <https://cloud.ibm.c
 
 Within the newly created instance:
 - Add a new application
-- Give it a name
+- Give it a name. For example your team name so you can easily find it back from the list.
 - Use "regularwebapp" as application type
 
 When you click on the newly created app you should see a JSON structure with all info such as : clientId, tenantId, secret, name, ...

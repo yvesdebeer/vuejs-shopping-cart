@@ -754,7 +754,7 @@ Start the application and check if you get the login screen from IBM App ID when
 ```
 
 You will probably get an error "Invalid redirect_uri".
-To solve this, follow the instructions from the error page and add http://localhost:3000/* as a web redirect URL.
+To solve this, got to your AppID service -> Manage Authentication -> Authentication Settings and add http://localhost:3000/* as a web redirect URL.
 
 As a final step we need to create the "REDIRECT_URL_WEB_APP"-url in our application.
 This url e.g. "http://localhost:8080/loginwithtoken" will be called by our NodeJS application and will process the userid and tokens to store them into our Vuex store so we can keep track of the logged user.
@@ -997,7 +997,7 @@ Once your project is in sync with the gitub repository, open up the Openshift We
 
 - Select Add from Dockerfile
 - Fill in the "Git Repo URL" which points to your project on github
-- Click "Show Advanced Git Options" and specify the "Git Reference" to point to your branch. This is only needed if your branch is different then "master" !
+- Click "Show Advanced Git Options" and specify the "Git Reference" to point to your branch. This is only needed if your branch is different than "master" !
 - Change the Application and Name accordingly or accept the defaults
 - Finally Click "Create"
 

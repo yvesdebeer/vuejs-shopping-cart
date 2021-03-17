@@ -999,7 +999,7 @@ Once your project is in sync with the gitub repository, open up the Openshift We
 - Select Add from Dockerfile
 - Fill in the "Git Repo URL" which points to your project on github
 - Click "Show Advanced Git Options" and specify the "Git Reference" to point to your branch. This is only needed if your branch is different than "master" !
-- Change the Application and Name accordingly or accept the defaults
+- Change the 'Application Name' and 'Name' accordingly or accept the defaults
 - Finally Click "Create"
 
 This should result in a full deployment of the application.
@@ -1126,7 +1126,7 @@ export default {
 ...
 
 ```
-At this point you should be able to access your application using the generated application URL but you will not see any products ! Any idea why these are not shown ? Check the console log using the 'inspect' function within your chrome browser.
+At this point you should be able to access your application using the generated application URL but you might not see any products ! If that is the case, check the console log using the 'inspect' function within your chrome browser.
 
 - Now you can also set the URL variables as part of the Build Config in OpenShift:
 

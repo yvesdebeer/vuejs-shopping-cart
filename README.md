@@ -892,7 +892,7 @@ export default new Vuex.Store({
 
 In this section we will describe how to take production-ready VueJS-code (Html & Javascript), push it into a Nginx docker container and deploy it on OpenShift.
 
-* First create a build from your VueJS project
+* Goto the root of your 'Shopping-Cart' folder and create a build from your VueJS project
 
 ```
 # npm run build
@@ -968,6 +968,7 @@ This will start the container. The -d argument tells docker to run in the backgr
 ## Deploy to OpenShift
 
 In order to avoid having to run the "npm run build" locally we can also use a Dockerfile as a two-step process.
+Replace the existing Dockerfile with the following:
 
 ```
 # build stage

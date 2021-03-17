@@ -603,11 +603,11 @@ Now you should have a working application. Verify the shopping cart works correc
 
 For user authentication we will make use of the IBM "App ID" service and integrate it into our application.
 
-First create a new "App ID" service instance in IBM Cloud - <https://cloud.ibm.com> - it's completly free to use with a "Lite Plan".
+First create a new "App ID" service instance in IBM Cloud. Make sure to select the 'Frankurt (eu-de)' region, select the "Graduated Tier" and give the 'Service name' a name that corresponds to your <Team name> so you can find it back afterwards.
 
-Within the newly created instance:
+Open the newly created Service instance:
 - Add a new application
-- Give it a name. For example your team name so you can easily find it back from the list.
+- Give it a name.
 - Use "regularwebapp" as application type
 
 When you click on the newly created app you should see a JSON structure with all info such as : clientId, tenantId, secret, name, ...
@@ -619,7 +619,7 @@ NodeJS uses 'openid-client'-package for oauth communication.
 The Vue.js application invokes a ‘login’ endpoint of this service. The authentication service triggers the OAuth dance and returns the tokens to the web application.
 After successful logins the Vue.js web application retrieves the access token and stores it together with the user name and email address in the Vuex store.
 
-**Create a new node.js application in a directory outside your shopping cart application**
+**Create a new node.js application in a directory/folder outside your shopping cart application/folder**
 
 Add a package.json file:
 

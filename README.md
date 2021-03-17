@@ -613,7 +613,7 @@ Open the newly created Service instance:
 When you click on the newly created app you should see a JSON structure with all info such as : clientId, tenantId, secret, name, ...
 We will need these values later.
 
-As there is no direct integration available for VueJS we will make use of a seperate NodeJS application
+As there is no direct integration available for VueJS we will make use of a separate NodeJS application
 which will expose an API for us to call and which will communicate with IBM "App ID".
 NodeJS uses 'openid-client'-package for oauth communication.
 The Vue.js application invokes a ‘login’ endpoint of this service. The authentication service triggers the OAuth dance and returns the tokens to the web application.
@@ -636,8 +636,8 @@ Add a package.json file:
   "author": "",
   "license": "ISC"
 }
-# npm i express express-session dotenv
-# npm i openid-client@2.4.5
+# npm i express express-session dotenv --save
+# npm i openid-client@2.4.5 --save
 
 ```
 Create server.js

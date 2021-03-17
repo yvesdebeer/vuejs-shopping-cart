@@ -621,7 +621,9 @@ After successful logins the Vue.js web application retrieves the access token an
 
 **Create a new node.js application in a directory/folder outside your shopping cart application/folder**
 
-Add a package.json file:
+This node.js application will act as an authentication layer between your Front-end VUE.JS application and the IBM AppID service. This application makes use of the 'express'-framework (to serve URL's for authentication) and the openid-client to perform the oauth communication with IBM AppID.
+
+Create a 'package.json' file in your newly created folder: e.g. 'nodejs-authentication':
 
 ```
 # cat package.json
@@ -636,11 +638,15 @@ Add a package.json file:
   "author": "",
   "license": "ISC"
 }
+```
+Add the required node-modules to your node.js project:
+
+```
 # npm i express express-session dotenv
 # npm i openid-client@2.4.5
 
 ```
-Create server.js
+Create a 'server.js' file:
 
 ```
 require('dotenv').config();
@@ -886,7 +892,7 @@ export default new Vuex.Store({
 
 In this section we will describe how to take production-ready VueJS-code (Html & Javascript), push it into a Nginx docker container and deploy it on OpenShift.
 
-* Create a build from your VueJS project
+* First create a build from your VueJS project
 
 ```
 # npm run build
@@ -948,7 +954,7 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ```
 # docker build -t shopping:1.0 .
-# docker run -d --rm --name shopping-cart -p 3000:8080 shopping:1.0
+# docker run -d --rm --name shopping-cart -p 8080:8080 shopping:1.0
 ```
 
 This will start the container. The -d argument tells docker to run in the background. The --rm is used so that the container image is destroyed once you run ‘docker stop’. The --name is a label for your container. The -p maps port 3000 on your local machine to port 8080 in our container. This is the port on which nginx is running according to our config file. Finally, shopping-cart is the name you gave to the container you built.

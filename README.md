@@ -37,7 +37,7 @@ If you don't have a web-service yet, you can use e.g. "Mockoon" to quicky run a 
 Check that your product service is working: http://localhost:8000/products !
 
 ```
-[[
+[
   {
     "description": "3.0GHz Dual-core Haswell Intel Core i5 Turbo Boost up to 3.2 GHz, 3MB L3 cache 8GB (two 4GB SO-DIMMs) of 1600MHz DDR3 SDRAM",
     "id": 1,
@@ -62,7 +62,7 @@ Check that your product service is working: http://localhost:8000/products !
     "thumbnail_url": "https://macbookpics.s3.eu-de.cloud-object-storage.appdomain.cloud/img3.jpeg",
     "title": "Macbook Pro 15.4' Retina MC975LL/A Model 2012"
   }
-]](https://cloud.ibm.com/authorize/ucllprojectweek)
+]
 ```
 **Edit src/store/index.js**
 
@@ -727,7 +727,6 @@ app.get('/', (req, res) => {
 })
 
 app.listen(3000, () => console.log('Listening on port 3000'))
-
 ```
 
 Create a file ".env" - see sample below

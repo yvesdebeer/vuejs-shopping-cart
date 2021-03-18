@@ -610,8 +610,8 @@ Open the newly created Service instance:
 - Give it a name.
 - Use "regularwebapp" as application type
 
-When you click on the newly created app you should see a JSON structure with all info such as : clientId, tenantId, secret, name, ...
-We will need these values later.
+When you click on the newly created app you should see a JSON structure with all info such as : clientId, tenantId and oAuthServerURL.
+You will need these values later !
 
 As there is no direct integration available for VueJS we will make use of a separate NodeJS application
 which will expose an API for us to call and which will communicate with IBM "App ID".
@@ -621,7 +621,7 @@ After successful logins the Vue.js web application retrieves the access token an
 
 **Create a new node.js application in a directory/folder outside your shopping cart application/folder**
 
-This node.js application will act as an authentication layer between your Front-end VUE.JS application and the IBM AppID service. This application makes use of the 'express'-framework (to serve URL's for authentication) and the openid-client to perform the oauth communication with IBM AppID.
+This node.js application will act as an authentication layer between your Frontend VueJs application and the 'IBM AppID' service. This application makes use of the 'Express' framework (to serve URL's for authentication) and the openid-client module to perform the oauth communication with IBM AppID.
 
 Create a 'package.json' file in your newly created folder: e.g. 'nodejs-authentication':
 
@@ -666,11 +666,11 @@ app.use(session({
 Issuer.defaultHttpOptions = { timeout: 15000 }
 
 const issuer = new Issuer({
-  issuer: process.env.APPID_ISSUER,
-  authorization_endpoint: process.env.APPID_AUTHORIZATION_ENDPOINT,
-  token_endpoint: process.env.APPID_TOKEN_ENDPOINT,
-  userinfo_endpoint: process.env.APPID_USERINFO_ENDPOINT,
-  jwks_uri: process.env.APPID_JWKS_URI,
+  issuer: process.env.APPID_OAUTHSERVERURL,
+  authorization_endpoint: process.env.APPID_OAUTHSERVERURL+'/authorization',
+  token_endpoint: process.env.APPID_OAUTHSERVERURL+'/token',
+  userinfo_endpoint: process.env.APPID_OAUTHSERVERURL+'/userinfo',
+  jwks_uri: process.env.APPID_OAUTHSERVERURL+'/publickeys',
 });
 console.log('Issuer %s %O', issuer.issuer, issuer.metadata);
 issuer.defaultHttpOptions = { timeout: 15000 }
@@ -721,6 +721,7 @@ app.get('/login', (req, res) => {
 app.get('/health', (req, res) => {
   res.send('up');
 })
+
 app.get('/', (req, res) => {
   res.send('up');
 })
@@ -732,20 +733,15 @@ app.listen(3000, () => console.log('Listening on port 3000'))
 Create a file ".env" - see sample below
 
 ```
-APPID_ISSUER=https://us-south.appid.cloud.ibm.com/oauth/v4/8f1d603d-2a03-4fa5-8d3b-2218c200929e
-APPID_OPENID_CONFIG=https://us-south.appid.cloud.ibm.com/oauth/v4/8f1d603d-2a03-4fa5-8d3b-2218c200929e/.well-known/openid-configuration
-APPID_AUTHORIZATION_ENDPOINT=https://us-south.appid.cloud.ibm.com/oauth/v4/8f1d603d-2a03-4fa5-8d3b-2218c200929e/authorization
-APPID_TOKEN_ENDPOINT=https://us-south.appid.cloud.ibm.com/oauth/v4/8f1d603d-2a03-4fa5-8d3b-2218c200929e/token
-APPID_USERINFO_ENDPOINT=https://us-south.appid.cloud.ibm.com/oauth/v4/8f1d603d-2a03-4fa5-8d3b-2218c200929e/userinfo
-APPID_JWKS_URI=https://us-south.appid.cloud.ibm.com/oauth/v4/8f1d603d-2a03-4fa5-8d3b-2218c200929e/publickeys
+APPID_OAUTHSERVERURL=https://us-south.appid.cloud.ibm.com/oauth/v4/8f1d603d-2a03-4fa5-8d3b-2218c200929e
 APPID_CLIENTID=xxx
 APPID_SECRET=xxx
 REDIRECT_URL_CALLBACK=http://localhost:3000/callback
 REDIRECT_URL_WEB_APP=http://localhost:8080/loginwithtoken
 ```
 
-Update each value with your own IBM App ID values accordingly.
-Also verify the "REDIRECT_URL_WEB_APP"-url points to your application.
+Update each value with your own IBM App ID values as noted in the previous step
+Also verify that the "REDIRECT_URL_WEB_APP" url points to your application.
 
 Start the application and check if you get the login screen from IBM App ID when clicking the Login-button on the navigation bar.
 
@@ -1022,7 +1018,7 @@ Once the Deployment has completed, you can verify the application is working cor
 
 ```
 VUE_APP_AUTH_URL="http://localhost:3000/login"
-VUE_APP_PRODUCTS_URL="http://localhost:8080/products"
+VUE_APP_PRODUCTS_URL="http://localhost:8000/products"
 ```
 
 - Update src/store/index.js
@@ -1048,7 +1044,7 @@ export default new Vuex.Store({
     },
     endpoints: {
       login: "http://localhost:3000/login",
-      products: "http://localhost:8080/products"
+      products: "http://localhost:8000/products"
     },
    },
    getters: {

@@ -2,6 +2,10 @@
 
 This guide contains instructions to create an online store application, including shopping cart and client authentication. At the end you will also find the instructions to deploy the application on Red Hat Openshift.
 
+##Architecture diagram:
+
+![Architecure](https://github.com/yvesdebeer/vuejs-shopping-cart/img/Architecture.png)
+
 If you are new to VueJS, here are some links to get started :
 
 * <https://travishorn.com/vue-online-store-with-shopping-cart-c072433f8d9e>

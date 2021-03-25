@@ -607,7 +607,7 @@ Now you should have a working application. Verify the shopping cart works correc
 
 For user authentication we will make use of the IBM "App ID" service and integrate it into our application.
 
-First create a new "App ID" service instance in IBM Cloud. Make sure to select the 'Frankurt (eu-de)' region, select the "Graduated Tier" and give the 'Service name' a name that corresponds to your <Team name> so you can find it back afterwards.
+First create a new "App ID" service instance in IBM Cloud. Make sure to select the 'Frankurt (eu-de)' region, select the "Graduated Tier" and give the 'Service name' a name that corresponds to your \<Team name\> so you can find it back afterwards.
 
 Open the newly created Service instance:
 - Add a new application

@@ -621,7 +621,7 @@ As there is no direct integration available for VueJS we will make use of a sepa
 which will expose an API for us to call and which will communicate with IBM "App ID".
 NodeJS uses 'openid-client'-package for oauth communication.
 The Vue.js application invokes a ‘login’ endpoint of this service. The authentication service triggers the OAuth dance and returns the tokens to the web application.
-After successful logins the Vue.js web application retrieves the access token and stores it together with the user name and email address in the Vuex store.
+After successful login the Vue.js web application retrieves the access token and stores it together with the user name and email address in the Vuex store.
 
 **Create a new node.js application in a directory/folder outside your shopping cart application/folder**
 

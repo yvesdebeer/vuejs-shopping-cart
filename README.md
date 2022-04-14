@@ -995,7 +995,7 @@ Make sure you put the Dockerfile into the root of your project directory !
 
 Once your project is in sync with the gitub repository, open up the Openshift Web-console: Goto the Developer perspective and click "Add" from the menu on the left.
 
-- Select Add from Dockerfile
+- Select Import from Git
 - Fill in the "Git Repo URL" which points to your project on github
 - Click "Show Advanced Git Options" and specify the "Git Reference" to point to your branch. This is only needed if your branch is different than "master" !
 - Change the 'Application Name' and 'Name' accordingly or accept the defaults
